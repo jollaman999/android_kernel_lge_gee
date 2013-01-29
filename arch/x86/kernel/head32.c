@@ -19,6 +19,7 @@
 #include <asm/io_apic.h>
 #include <asm/bios_ebda.h>
 #include <asm/tlbflush.h>
+#include <asm/bootparam_utils.h>
 
 static void __init i386_default_early_setup(void)
 {
@@ -31,6 +32,8 @@ static void __init i386_default_early_setup(void)
 
 void __init i386_start_kernel(void)
 {
+	sanitize_boot_params(&boot_params);
+
 	memblock_reserve(__pa_symbol(&_text),
 			 __pa_symbol(&__bss_stop) - __pa_symbol(&_text));
 
