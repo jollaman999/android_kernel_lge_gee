@@ -876,7 +876,6 @@ static ssize_t dvb_dvr_write(struct file *file, const char __user *buf,
 
 		if (src->error) {
 			ret = src->error;
-			dvb_ringbuffer_flush(src);
 			mutex_unlock(&dmxdev->mutex);
 			wake_up_all(&src->queue);
 			return ret;
