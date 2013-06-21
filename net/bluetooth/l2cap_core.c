@@ -5251,8 +5251,12 @@ static inline int l2cap_move_channel_confirm_rsp(struct l2cap_conn *conn,
 		(struct l2cap_move_chan_cfm_rsp *) data;
 	struct sock *sk;
 	struct l2cap_pinfo *pi;
-
 	u16 icid;
+	u16 cmd_len;
+
+	cmd_len = __le16_to_cpu(cmd->len);
+	if (cmd_len < sizeof(*rsp))
+		return -EPROTO;
 
 	icid = le16_to_cpu(rsp->icid);
 
