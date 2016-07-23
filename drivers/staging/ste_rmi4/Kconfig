@@ -1,4 +1,4 @@
-config TOUCHSCREEN_SYNAPTICS_I2C_RMI4
+config TOUCHSCREEN_SYNAPTICS_I2C_STE_RMI4
 	tristate "Synaptics i2c rmi4 touchscreen"
 	depends on I2C && INPUT
 	help
