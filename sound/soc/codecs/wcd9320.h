@@ -190,7 +190,7 @@ struct anc_header {
 extern int taiko_mclk_enable(struct snd_soc_codec *codec, int mclk_enable,
 			     bool dapm);
 
-extern void *taiko_mbhc_cal_btn_det_mp(const struct taiko_mbhc_btn_detect_cfg
+extern void *taiko_mbhc_cal_btn_det_mp(struct taiko_mbhc_btn_detect_cfg
 				       *btn_det,
 				       const enum taiko_mbhc_btn_det_mem mem);
 
