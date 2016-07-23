@@ -369,11 +369,17 @@ KBUILD_CPPFLAGS := -D__KERNEL__
 KBUILD_CFLAGS   := -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs \
 		   -fno-strict-aliasing -fno-common \
 		   -Werror-implicit-function-declaration \
+		   -mcpu=cortex-a15 -mtune=cortex-a15 \
+		   -mfpu=neon-vfpv4 -mfloat-abi=softfp \
+		   -mvectorize-with-neon-quad \
+		   -fgcse-after-reload -fgcse-sm -fgcse-las \
+		   -ftree-loop-im -ftree-loop-ivcanon \
+		   -fivopts -ftree-vectorize -fmodulo-sched \
 		   -Wno-format-security \
 		   -fno-delete-null-pointer-checks \
 		   -std=gnu89
 
-KBUILD_AFLAGS_KERNEL :=
+KBUILD_AFLAGS_KERNEL := -mcpu=cortex-a15 -mtune=cortex-a15 -mfpu=neon-vfpv4
 KBUILD_CFLAGS_KERNEL :=
 KBUILD_AFLAGS   := -D__ASSEMBLY__
 KBUILD_AFLAGS_MODULE  := -DMODULE
