@@ -437,10 +437,8 @@ error_get_fail:
 
 static void cpufreq_powerstats_create(unsigned int cpu,
 		struct cpufreq_frequency_table *table, int count) {
-	unsigned int alloc_size, i = 0, j = 0, ret = 0;
+	unsigned int alloc_size, i = 0, j = 0;
 	struct cpufreq_power_stats *powerstats;
-	struct device_node *cpu_node;
-	char device_path[16];
 
 	powerstats = kzalloc(sizeof(struct cpufreq_power_stats),
 			GFP_KERNEL);
