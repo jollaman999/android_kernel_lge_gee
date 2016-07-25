@@ -4131,7 +4131,7 @@ static struct sock *l2cap_create_connect(struct l2cap_conn *conn,
 	__le16 psm;
 
 	if (cmd_len < sizeof(struct l2cap_conn_req))
-		return -EPROTO;
+		return NULL;
 
 	scid = __le16_to_cpu(req->scid);
 	psm = req->psm;
@@ -4268,7 +4268,10 @@ sendresp:
 static int l2cap_connect_req(struct l2cap_conn *conn,
 			     struct l2cap_cmd_hdr *cmd, u16 cmd_len, u8 *data)
 {
-	l2cap_create_connect(conn, cmd, data, cmd_len, L2CAP_CONN_RSP, 0);
+	if (cmd_len < sizeof(struct l2cap_conn_req))
+		return -EPROTO;
+
+	l2cap_create_connect(conn, cmd, cmd_len, data, L2CAP_CONN_RSP, 0);
 	return 0;
 }
 
@@ -4915,7 +4918,7 @@ static inline int l2cap_create_channel_req(struct l2cap_conn *conn,
 		hci_dev_put(hdev);
 	}
 
-	sk = l2cap_create_connect(conn, cmd, data, cmd_len, L2CAP_CREATE_CHAN_RSP,
+	sk = l2cap_create_connect(conn, cmd, cmd_len, data, L2CAP_CREATE_CHAN_RSP,
 					req->amp_id);
 
 	if (sk)
